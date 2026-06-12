@@ -147,8 +147,8 @@ const isDe = pathname.startsWith("/de");
       {/* Simulateur */}
       <section className="simulator-card">
         <div className="sim-header">
-          <span style={{fontWeight: 600, fontSize: '14px'}}><i className="fa-solid fa-calculator"></i> Simulez en 1 clic</span>
-          <span className="sim-tag">Nouveau</span>
+          <span style={{fontWeight: 600, fontSize: '14px'}}><i className="fa-solid fa-calculator"></i> Mit einem Klick simulieren</span>
+          <span className="sim-tag">Neu</span>
         </div>
         {/* <p style={{fontSize: '12px', color: '#888', margin: '10px 0'}}>Empruntez de 500 € à 10 000 € sur 6 à 84 mois.</p> */}
         
