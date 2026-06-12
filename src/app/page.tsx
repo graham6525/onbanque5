@@ -59,14 +59,14 @@ const isDe = pathname.startsWith("/de");
             href={pathname.replace(/^\/de/, "") || "/"} 
             style={{ padding: "6px 12px", borderRadius: "8px", border: !isDe ? "2px solid #2563eb" : "1px solid #ccc", background: !isDe ? "#eff6ff" : "#fff", fontWeight: !isDe ? "bold" : "normal", fontSize: "13px", textDecoration: "none", color: "#000" }}
           >
-             FR
+          🇫🇷    FR
           </Link>
           <Link 
             href={pathname.startsWith("/de") ? pathname : `/de${pathname === "/" ? "" : pathname}`} 
             style={{ padding: "6px 12px", borderRadius: "8px", border: isDe ? "2px solid #2563eb" : "1px solid #ccc", background: isDe ? "#eff6ff" : "#fff", fontWeight: isDe ? "bold" : "normal", fontSize: "13px", textDecoration: "none", color: "#000" }}
           >
-             DE
-          </Link>
+         🇩🇪     DE
+          </Link> 
         </div>
       </header>
 
