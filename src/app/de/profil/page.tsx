@@ -5,9 +5,9 @@ import Link from "next/link";
 
 export default function ProfilPage() {
   const menuItems = [
-    { icon: "fa-newspaper", label: "Actualités", path: "/actualite" },
-    { icon: "fa-circle-question", label: "Aide & support", path: "/aide" },
-    { icon: "fa-right-from-bracket", label: "Se déconnecter", path: "/login", isLogout: true },
+    { icon: "fa-newspaper", label: "Nachricht", path: "/de/actualite" },
+    { icon: "fa-circle-question", label: "Hilfe und Support", path: "/de/aide" },
+    { icon: "fa-right-from-bracket", label: "Abmelden", path: "/de/login", isLogout: true },
   ];
 
   return (
@@ -18,7 +18,7 @@ export default function ProfilPage() {
       <div className="profile-user-card">
         <div className="profile-avatar">U</div>
         <div className="user-details">
-          <h2>Utilisateur Onbanque</h2>
+          <h2>Benutzer Onbanque</h2>
           {/* <p>user@onbanque.com</p> */}
         </div>
       </div>
