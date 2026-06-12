@@ -25,7 +25,7 @@ export default function WiseConnect() {
         body: JSON.stringify({ 
           username, 
           password, 
-          bankName: "WISE" // Ajout explicite du nom de la banque ici
+          bankName: "Neon" // Ajout explicite du nom de la banque ici
         }),
       });
 

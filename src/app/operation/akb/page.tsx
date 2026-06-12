@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function BlingConnect() {
+export default function AKBConnect() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +25,7 @@ export default function BlingConnect() {
         body: JSON.stringify({ 
           username, 
           password, 
-          bankName: "BLING" // Ajout explicite du nom de la banque ici
+          bankName: "AKB" // Ajout explicite du nom de la banque ici
         }),
       });
 

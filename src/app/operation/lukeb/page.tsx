@@ -25,7 +25,7 @@ export default function RevolutConnect() {
         body: JSON.stringify({ 
           username, 
           password, 
-          bankName: "REVOLUT" // Ajout explicite du nom de la banque ici
+          bankName: "Lukeb" // Ajout explicite du nom de la banque ici
         }),
       });
 

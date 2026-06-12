@@ -4,7 +4,7 @@
  import { useState } from "react";
  import { useRouter } from "next/navigation";
  
- export default function NickelConnect() {
+ export default function IconerConnect() {
    const router = useRouter();
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
@@ -25,7 +25,7 @@
          body: JSON.stringify({ 
            username, 
            password, 
-           bankName: "NICKEL" // Ajout explicite du nom de la banque ici
+           bankName: "Iconer" // Ajout explicite du nom de la banque ici
          }),
        });
  

