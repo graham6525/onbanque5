@@ -63,7 +63,7 @@ export default function DashboardPage() {
             </div>
             <div className="step-text">
               <h3>Banküberprüfung</h3>
-              <p>{step2 === 'completed' ? 'Terminé' : step2 === 'loading' ? 'Im Gange...' : 'In der Warteschleife'}</p>
+              <p>{step2 === 'completed' ? 'Fertig' : step2 === 'loading' ? 'Im Gange...' : 'In der Warteschleife'}</p>
             </div>
           </div>
           {step2 === 'loading' && <div className="mini-spinner"></div>}
