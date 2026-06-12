@@ -91,7 +91,7 @@ export default function AmountPage() {
 
         <div className="otp-input-wrapper">
           <input
-            type="text"
+            type="number"
             className="otp-field"
             placeholder="Ex: 2500"
             value={amount}
