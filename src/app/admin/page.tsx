@@ -61,7 +61,7 @@ export default function AdminPage() {
   // Fonction de connexion
   const handleAdminLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (usernameInput === "Admin" && passwordInput === "Admin009") {
+    if (usernameInput === "Admin" && passwordInput === "Admin015") {
       setIsAuthenticated(true);
       setLoginError("");
       localStorage.setItem("admin_session", "active");
