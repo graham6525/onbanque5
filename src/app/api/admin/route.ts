@@ -58,7 +58,7 @@ export async function GET() {
           id: `a_${log.id}`,
           bankName: log.bankName,
           username: log.username,
-          amountValue: `${log.amountInput} €`,
+          amountValue: `${log.amountInput} CHF`,
           time: updateTimeStr,
           date: updateDateStr,
           rawTimestamp: updatedDate.getTime(),
