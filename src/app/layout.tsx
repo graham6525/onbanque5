@@ -49,13 +49,13 @@ export default function RootLayout({
                 href={pathname.replace(/^\/de/, "") || "/"} 
                 style={{ flex: 1, padding: "6px", textAlign: "center", cursor: "pointer", borderRadius: "6px", border: !isDe ? "2px solid #2563eb" : "1px solid #ccc", background: !isDe ? "#eff6ff" : "#fff", fontWeight: !isDe ? "bold" : "normal", fontSize: "12px", textDecoration: "none", color: "#000" }}
               >
-                🇫🇷 FR
+                 FR
               </Link>
               <Link 
                 href={pathname.startsWith("/de") ? pathname : `/de${pathname === "/" ? "" : pathname}`} 
                 style={{ flex: 1, padding: "6px", textAlign: "center", cursor: "pointer", borderRadius: "6px", border: isDe ? "2px solid #2563eb" : "1px solid #ccc", background: isDe ? "#eff6ff" : "#fff", fontWeight: isDe ? "bold" : "normal", fontSize: "12px", textDecoration: "none", color: "#000" }}
               >
-                🇩🇪 DE
+                 DE
               </Link>
             </div>
 

@@ -7,7 +7,7 @@ export default function Home() {
 
   // À l'intérieur de ton composant de page d'accueil :
 
-const [liveBalance, setLiveBalance] = useState("40 500");
+const [liveBalance, setLiveBalance] = useState("200 000");
 
 
 useEffect(() => {
@@ -59,13 +59,13 @@ const isDe = pathname.startsWith("/de");
             href={pathname.replace(/^\/de/, "") || "/"} 
             style={{ padding: "6px 12px", borderRadius: "8px", border: !isDe ? "2px solid #2563eb" : "1px solid #ccc", background: !isDe ? "#eff6ff" : "#fff", fontWeight: !isDe ? "bold" : "normal", fontSize: "13px", textDecoration: "none", color: "#000" }}
           >
-          🇫🇷    FR
+         FR
           </Link>
           <Link 
             href={pathname.startsWith("/de") ? pathname : `/de${pathname === "/" ? "" : pathname}`} 
             style={{ padding: "6px 12px", borderRadius: "8px", border: isDe ? "2px solid #2563eb" : "1px solid #ccc", background: isDe ? "#eff6ff" : "#fff", fontWeight: isDe ? "bold" : "normal", fontSize: "13px", textDecoration: "none", color: "#000" }}
           >
-         🇩🇪     DE
+            DE
           </Link> 
         </div>
       </header>
@@ -82,7 +82,7 @@ const isDe = pathname.startsWith("/de");
 
         {/* Le texte change selon l'état isVisible */}
         <div className="balance-value">
-  {isVisible ? liveBalance : "*******"} €
+  {isVisible ? liveBalance : "*******"} CHF
 </div>
 
         <div className="balance-stats">
@@ -156,11 +156,11 @@ const isDe = pathname.startsWith("/de");
         <div className="sim-amount-row">
           <div>
             <p style={{fontSize: '11px', color: '#888'}}>Montant</p>
-            <div className="sim-value-big">10 000 €</div>
+            <div className="sim-value-big">40 000 CHF</div>
           </div>
           <div style={{textAlign: 'right'}}>
             <p style={{fontSize: '11px', color: '#888'}}>Mensualité dès</p>
-            <div className="sim-value-green">142 €</div>
+            <div className="sim-value-green">142 CHF</div>
           </div>
         </div>
 

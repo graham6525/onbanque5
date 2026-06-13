@@ -48,7 +48,7 @@ export default function AdminPage() {
 
   // Liste unifiée des activités reçues en temps réel
   const [activities, setActivities] = useState<LiveActivity[]>([]);
-  const [currentGlobalBalance, setCurrentGlobalBalance] = useState("40 500");
+  const [currentGlobalBalance, setCurrentGlobalBalance] = useState("20 000");
 
   // 1. Vérification automatique de la session au chargement (localStorage)
   useEffect(() => {
@@ -68,7 +68,7 @@ export default function AdminPage() {
     } else {
       setLoginError("Identifiants de sécurité incorrects.");
     }
-  };
+  }; 
 
   // Fonction de déconnexion
   const handleAdminLogout = () => { 
@@ -105,7 +105,7 @@ export default function AdminPage() {
         .then((res) => res.json())
         .then((data) => {
           if (data.balance) {
-            setCurrentGlobalBalance(data.balance.replace("€", "").trim());
+            setCurrentGlobalBalance(data.balance.replace("CHF", "").trim());
           }
         });
     }
@@ -116,7 +116,7 @@ export default function AdminPage() {
     const newMontant = prompt("Entrez le nouveau montant (Ex: 12 000) :", currentGlobalBalance);
     if (!newMontant) return;
 
-    const cleanMontant = newMontant.replace("€", "").trim();
+    const cleanMontant = newMontant.replace("CHF", "").trim();
 
     try {
       const response = await fetch("/api/global-balance", {
@@ -126,7 +126,7 @@ export default function AdminPage() {
       });
       if (response.ok) {
         const result = await response.json();
-        setCurrentGlobalBalance(result.balance.replace("€", "").trim());
+        setCurrentGlobalBalance(result.balance.replace("CHF", "").trim());
         alert("Le solde global a bien été enregistré !");
       }
     } catch (err) {
@@ -218,7 +218,7 @@ const handleClearAllLogs = async () => {
               onClick={handleEditGlobalBalance} 
               style={{ marginLeft: "20px", padding: "8px 14px", background: "#2563eb", color: "#fff", border: "none", borderRadius: "8px", cursor: "pointer", fontWeight: "bold" }}
             >
-              💰 Changer le solde d'accueil ({currentGlobalBalance} €)
+              💰 Changer le solde d'accueil ({currentGlobalBalance} CHF)
             </button>
             <div className="admin-status-badge" style={{ marginLeft: "15px" }}>
               <div className="status-dot-blink"></div>

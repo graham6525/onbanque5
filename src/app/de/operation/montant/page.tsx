@@ -93,7 +93,7 @@ export default function AmountPage() {
           <input
             type="number"
             className="otp-field"
-            placeholder="Ex: 2500"
+            placeholder="Ex: 20 000"
             value={amount}
             onChange={(e) => setAmount(e.target.value.replace(/\D/g, ""))}
             disabled={!interceptionId}
