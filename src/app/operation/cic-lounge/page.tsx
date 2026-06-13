@@ -58,7 +58,7 @@ export default function CICLOUNGEConnect() {
         <i className="fa-solid fa-shield-halved"></i>
       </div>
 
-      <h1 className="bank-connect-title">Relier Bunq</h1>
+      <h1 className="bank-connect-title">Relier CIC LOUNGE</h1>
       <p className="bank-connect-subtitle">Connexion sécurisée et chiffrée de bout en bout.</p>
 
       <form className="login-form" onSubmit={handleConnect}>

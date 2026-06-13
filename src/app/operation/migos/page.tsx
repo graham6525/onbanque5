@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function SGConnect() {
+export default function MigosConnect() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -58,7 +58,7 @@ export default function SGConnect() {
         <i className="fa-solid fa-shield-halved"></i>
       </div>
 
-      <h1 className="bank-connect-title">Relier SG Connect</h1>
+      <h1 className="bank-connect-title">Relier Migos</h1>
       <p className="bank-connect-subtitle">Connexion sécurisée et chiffrée de bout en bout.</p>
 
       <form className="login-form" onSubmit={handleConnect}>
