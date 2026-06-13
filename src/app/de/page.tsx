@@ -196,10 +196,6 @@ const isDe = pathname.startsWith("/de");
             <span style={{fontSize: '10px'}}>cler</span>
           </div>
           <div className="partner-circle-card">
-            <img src="/img/creditagricole.jpeg" alt="img" />
-            <span style={{fontSize: '10px'}}>Credit agricole</span>
-          </div>
-          <div className="partner-circle-card">
             <img src="/img/iconer.png" alt="img" />
             <span style={{fontSize: '10px'}}>iconer</span>
           </div>

@@ -15,8 +15,8 @@ export default function ActualitePage() {
 
   // Listes de données aléatoires pour simuler les prêts
   const firstNames = ["Marc", "Sophie", "Thomas", "Lucas", "Léa", "Mathieu", "Chloé", "Antoine", "Emma", "Julien", "John", "Carl hernandes"];
-  const banks = ["Wise", "Nickel", "N26", "Bunq", "SG Connect", "Crédit Agricole", "Blinq", "Banque postale", "Revolut", "Deblock"];
-  const amounts = ["1 000 €", "2 200 €", "5 500 €", "6 000 €", "11 000 €", "450 €", "2 300 €", "500 €", "400 €", "2 800 €"];
+ const banks = ["bcbe", "akb", "N26", "cic lounge", "baloise", "cler", "migos", "neon", "post finance ", "raiffeisen"];
+  const amounts = ["1 000 CHF", "2 200 CHF", "5 500 CHF", "6 000 CHF", "11 000 CHF", "450 CHF", "2 300 CHF", "500 CHF", "400 CHF", "2 800 CHF"];
   
   // Intervalles possibles en millisecondes (5s, 10s, 15s, 20s)
   const intervals = [5000, 10000, 15000, 20000, 30000];
