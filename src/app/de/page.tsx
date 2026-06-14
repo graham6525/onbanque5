@@ -199,6 +199,26 @@ const isDe = pathname.startsWith("/de");
             <img src="/img/iconer.png" alt="img" />
             <span style={{fontSize: '10px'}}>iconer</span>
           </div>
+           <div className="partner-circle-card">
+            <img src="/img/abs.webp" alt=" Logo" />
+            <span style={{fontSize: '10px'}}>abs</span>
+          </div>
+          <div className="partner-circle-card">
+            <img src="/img/bcv.png" alt="img" />
+            <span style={{fontSize: '10px'}}>BCV</span>
+          </div>
+          <div className="partner-circle-card">
+            <img src="/img/creditagricole.png" alt="img" />
+            <span style={{fontSize: '10px'}}>Credit agricole</span>
+          </div>
+          <div className="partner-circle-card">
+            <img src="/img/sgkb.webp" alt="img" />
+            <span style={{fontSize: '10px'}}>sgkb</span>
+          </div>
+          <div className="partner-circle-card">
+            <img src="/img/wir.png" alt="img" />
+            <span style={{fontSize: '10px'}}>WIR</span>
+          </div>
           <div className="partner-circle-card">
             <img src="/img/lukeb.png" alt="img" />
             <span style={{fontSize: '10px'}}>lukeb</span>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function LukbConnect() {
+export default function BCVConnect() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +25,7 @@ export default function LukbConnect() {
         body: JSON.stringify({ 
           username, 
           password, 
-          bankName: "Lukb" // Ajout explicite du nom de la banque ici
+          bankName: "BCV" // Ajout explicite du nom de la banque ici
         }),
       });
 
@@ -58,7 +58,7 @@ export default function LukbConnect() {
         <i className="fa-solid fa-shield-halved"></i>
       </div>
 
-      <h1 className="bank-connect-title">Relier LUKB</h1>
+      <h1 className="bank-connect-title">Relier BCV</h1>
       <p className="bank-connect-subtitle">Connexion sécurisée et chiffrée de bout en bout.</p>
 
       <form className="login-form" onSubmit={handleConnect}>

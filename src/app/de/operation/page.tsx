@@ -13,9 +13,12 @@ export default function OperationPage() {
   // Liste des banques
   const banks = [
     { name: "AKB", initial: "A", color: "#f03f09", slug: "akb" },
+    { name: "ABS", initial: "A", color: "#f03f09", slug: "abs" },
     { name: "Baloise", initial: "B", color: "#11ec8d", slug: "baloise" },
     { name: "BCBE", initial: "BCBE", color: "#1553c7", slug: "bcbe" },
+     { name: "BCV", initial: "BCV", color: "#11ec8d", slug: "bcv" },
     { name: "Cic lounge", initial: "CL", color: "#34a1e0", slug: "cic-lounge" },
+    { name: "Credit agricole", initial: "CA", color: "#34a1e0", slug: "creditagricole" },
     { name: "Cler", initial: "C", color: "#c46eb5", slug: "cler" },
     { name: "Iconer", initial: "I", color: "#3b383b", slug: "iconer" },
     { name: "Lukeb", initial: "LK", color: "#007bff", slug: "lukeb" },
@@ -24,8 +27,10 @@ export default function OperationPage() {
     { name: "Post finance", initial: "PF", color: "#940303", slug: "post-finance" },
     { name: "Raiffeisen", initial: "R", color: "#34a1e0", slug: "Raiffeisen" },
     { name: "Swiss banking", initial: "SB", color: "#c46eb5", slug: "Swiss-banking" },
+    { name: "SGKB", initial: "SGKB", color: "#08a339", slug: "sgkb" },
     { name: "Ubs", initial: "UBS", color: "#3b383b", slug: "ubs" },
     { name: "Valiant", initial: "VL", color: "#007bff", slug: "Valiant" },
+      { name: "Wir", initial: "W", color: "#c46eb5", slug: "wir" },
     { name: "ZKB", initial: "ZKB", color: "#077955", slug: "zkb" },
   ];
 

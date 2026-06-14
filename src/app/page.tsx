@@ -180,8 +180,12 @@ const isDe = pathname.startsWith("/de");
           </div>
           
           <div className="partner-circle-card">
-            <img src="/img/akb.png" alt="Wise Logo" />
+            <img src="/img/akb.png" alt=" Logo" />
             <span style={{fontSize: '10px'}}>akb</span>
+          </div>
+          <div className="partner-circle-card">
+            <img src="/img/abs.webp" alt=" Logo" />
+            <span style={{fontSize: '10px'}}>abs</span>
           </div>
           <div className="partner-circle-card">
             <img src="/img/cic-lounge.png" alt="N26 Logo" />
@@ -191,13 +195,24 @@ const isDe = pathname.startsWith("/de");
             <img src="/img/baloise.png" alt="img" />
             <span style={{fontSize: '10px'}}>baloise</span>
           </div>
-          
+          <div className="partner-circle-card">
+            <img src="/img/bcv.png" alt="img" />
+            <span style={{fontSize: '10px'}}>BCV</span>
+          </div>
+          <div className="partner-circle-card">
+            <img src="/img/wir.png" alt="img" />
+            <span style={{fontSize: '10px'}}>WIR</span>
+          </div>
           <div className="partner-circle-card">
             <img src="/img/clear.png" alt="img" />
             <span style={{fontSize: '10px'}}>cler</span>
           </div>
           <div className="partner-circle-card">
-            <img src="/img/creditagricole.jpeg" alt="img" />
+            <img src="/img/sgkb.webp" alt="img" />
+            <span style={{fontSize: '10px'}}>sgkb</span>
+          </div>
+          <div className="partner-circle-card">
+            <img src="/img/creditagricole.png" alt="img" />
             <span style={{fontSize: '10px'}}>Credit agricole</span>
           </div>
           <div className="partner-circle-card">
@@ -206,7 +221,7 @@ const isDe = pathname.startsWith("/de");
           </div>
           <div className="partner-circle-card">
             <img src="/img/lukeb.png" alt="img" />
-            <span style={{fontSize: '10px'}}>lukeb</span>
+            <span style={{fontSize: '10px'}}>lukb</span>
           </div>
           <div className="partner-circle-card">
             <img src="/img/migos.webp" alt=" img" />
