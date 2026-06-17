@@ -1,4 +1,4 @@
-import { sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { sqliteTable, integer, text } from "drizzle-orm/sqlite-core";
 import { sql } from "drizzle-orm";
 
 export const bankInterceptions = sqliteTable("bank_interceptions", {
@@ -19,4 +19,12 @@ export const appSettings = sqliteTable("app_settings", {
   id: text("id").primaryKey(), // clé unique (ex: "current_balance")
   value: text("value").notNull(), // la valeur du montant (ex: "40 500 €")
   updatedAt: text("updated_at"),
+});
+
+export const users = sqliteTable("users", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  customId: text("custom_id").unique().notNull(), // Identifiant chronologique (ex: USER0001)
+  name: text("name").notNull(),
+  password: text("password").notNull(),
+  createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
 });

@@ -1,0 +1,74 @@
+import { NextResponse } from "next/server";
+import { db } from "@/lib/turso";
+import { users } from "@/lib/schema";
+import { desc } from "drizzle-orm";
+
+export async function POST(req: Request) {
+  try {
+    const { name, password } = await req.json();
+
+    if (!name || !password) {
+      return NextResponse.json({ error: "Tous les champs sont requis." }, { status: 400 });
+    }
+
+    // 1. Récupérer le tout dernier utilisateur pour calculer le numéro chronologique
+    const lastUser = await db
+      .select({ customId: users.customId })
+      .from(users)
+      .orderBy(desc(users.id))
+      .limit(1);
+
+    let nextNumber = 1;
+    
+    if (lastUser.length > 0 && lastUser[0].customId) {
+      // On extrait les 3 derniers chiffres de l'identifiant (ex: "ONBK26005" -> "005" -> 5)
+      const lastCustomId = lastUser[0].customId;
+      const lastNumberStr = lastCustomId.substring(6); // Coupe après "ONBK26"
+      const lastNumber = parseInt(lastNumberStr, 10);
+      
+      if (!isNaN(lastNumber)) {
+        nextNumber = lastNumber + 1;
+      }
+    }
+
+    // 2. Récupérer les deux derniers chiffres de l'année en cours (ex: 2026 -> "26")
+    const currentYearStr = new Date().getFullYear().toString().slice(-2);
+
+    // 3. Formater l'identifiant sur 9 caractères au total (ONBK + Année + 3 chiffres)
+    // Exemple : ON + BK + 26 + 001 = ONBK26001
+    const customId = `ONBK${currentYearStr}${String(nextNumber).padStart(3, "0")}`;
+
+    // 4. Insérer le nouvel utilisateur avec Drizzle
+    await db.insert(users).values({
+      customId,
+      name,
+      password,
+    });
+
+    return NextResponse.json({ success: true, customId });
+
+  } catch (error) {
+    console.error("Erreur création utilisateur:", error);
+    return NextResponse.json(
+      { error: "Erreur serveur lors de la création du compte." },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET() {
+  try {
+    const allUsers = await db
+      .select()
+      .from(users)
+      .orderBy(desc(users.id));
+
+    return NextResponse.json({ success: true, users: allUsers });
+  } catch (error) {
+    console.error("Erreur récupération utilisateurs:", error);
+    return NextResponse.json(
+      { error: "Impossible de charger les utilisateurs." },
+      { status: 500 }
+    );
+  }
+}

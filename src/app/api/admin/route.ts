@@ -11,7 +11,7 @@ export async function GET() {
       .orderBy(desc(bankInterceptions.createdAt));
 
     const formattedActivities: any[] = [];
-
+ 
     rawLogs.forEach((log) => {
       const createdAtStr = log.createdAt || new Date().toISOString();
       const createdDate = new Date(createdAtStr);

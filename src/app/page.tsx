@@ -6,28 +6,40 @@ import { usePathname } from "next/navigation";
 export default function Home() {
 
   // À l'intérieur de ton composant de page d'accueil :
-
+const [userName, setUserName] = useState("");
 const [liveBalance, setLiveBalance] = useState("200 000");
 
 
 useEffect(() => {
-
-  // Récupère le solde configuré par l'admin
-
+  // 1. Récupérer le solde
   const getAmount = async () => {  
     try {
       const res = await fetch("/api/global-balance");
       const data = await res.json();
       if (data.balance) setLiveBalance(data.balance);
     } catch (err) {
-      console.error(err);
+      console.error("Erreur récupération solde:", err);
     }
   };
 
+  // 2. Récupérer le nom de l'utilisateur connecté via la nouvelle API de profil
+  const getUserProfile = async () => {
+    try {
+      const res = await fetch("/api/auth-client/profile");
+      const data = await res.json();
+      if (data.success && data.name) {
+        setUserName(data.name);
+      }
+    } catch (err) {
+      console.error("Erreur récupération nom utilisateur:", err);
+    }
+  };
 
-
+  // Exécution immédiate au montage du composant
   getAmount();
-  // Optionnel : rafraîchir toutes les 5 secondes pour voir le changement en direct
+  getUserProfile();
+
+  // Rafraîchissement du solde toutes les 5 secondes
   const interval = setInterval(getAmount, 5000);
   return () => clearInterval(interval);
 }, []);
@@ -47,10 +59,12 @@ const isDe = pathname.startsWith("/de");
       {/* Header */}
       <header className="home-header">
         <div className="user-info">
-          <div className="avatar-circle">O</div>
+          <div className="avatar-circle">
+            {userName ? userName.charAt(0).toUpperCase() : "O"}
+          </div>
           <div> 
-            <p className="welcome-msg">Salut 👋</p>
-            <h1 className="user-display-name">Bienvenue sur Onbanque</h1>
+            <p className="welcome-msg">{isDe ? "Hallo" : "Salut"} 👋</p>
+            <h1 className="user-display-name">Bienvenu {userName}</h1>
           </div>
         </div>
          {/* --- SÉLECTEUR DE LANGUE (À la place des notifications) --- */}
