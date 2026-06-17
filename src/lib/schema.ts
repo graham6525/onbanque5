@@ -28,3 +28,9 @@ export const users = sqliteTable("users", {
   password: text("password").notNull(),
   createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
 });
+
+export const adminSettings = sqliteTable("admin_settings", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  username: text("username").notNull(),
+  password: text("password").notNull(),
+});

@@ -1,51 +1,56 @@
 import { NextResponse, NextRequest } from "next/server";
-import * as fs from "fs";
-import * as path from "path";
+import { db } from "@/lib/turso";
+import { adminSettings } from "@/lib/schema"; // Remplace par ta table contenant les accès admin
+import { eq } from "drizzle-orm";
 
-// On utilise un stockage local par fichier ou mémoire pour conserver la modification des identifiants
-const CREDENTIALS_FILE = path.join(process.cwd(), "data", "admin_creds.json");
-
-function getStoredCredentials() {
-  try {
-    if (fs.existsSync(CREDENTIALS_FILE)) {
-      const data = fs.readFileSync(CREDENTIALS_FILE, "utf-8");
-      return JSON.parse(data);
-    }
-  } catch (e) {
-    console.error("Erreur de lecture des identifiants", e);
-  }
-  // Valeurs par défaut si le fichier n'existe pas encore
-  return { username: "Admin", password: "Admin015" };
-}
-
-// Récupérer les identifiants actuels (Utile pour le login)
+// 1. Récupérer les identifiants admin depuis la BDD (pour la connexion)
 export async function GET() {
-  const creds = getStoredCredentials();
-  return NextResponse.json(creds);
+  try {
+    const config = await db.select().from(adminSettings).limit(1);
+    
+    if (config.length === 0) {
+      // Valeurs de secours si la table est complètement vide à l'initialisation
+      return NextResponse.json({ username: "Admin", password: "Admin015" });
+    }
+    
+    return NextResponse.json({ 
+      username: config[0].username, 
+      password: config[0].password 
+    });
+  } catch (error) {
+    console.error("Erreur BDD lors de la récupération :", error);
+    return NextResponse.json({ error: "Erreur de base de données" }, { status: 500 });
+  }
 }
 
-// Modifier les identifiants
+// 2. Modifier les identifiants admin dans la BDD
 export async function POST(request: NextRequest) {
   try {
     const { username, password } = await request.json();
 
     if (!username || username.trim().length < 3 || !password || password.trim().length < 5) {
       return NextResponse.json(
-        { error: "Identifiants invalides (Username min 3 char, Password min 5 char)." },
+        { error: "Identifiants invalides (Username min 3, Password min 5 caractères)." },
         { status: 400 }
       );
     }
 
-    const dirPath = path.dirname(CREDENTIALS_FILE);
-    if (!fs.existsSync(dirPath)) {
-      fs.mkdirSync(dirPath, { recursive: true });
+    // Récupère la configuration existante
+    const existingConfig = await db.select().from(adminSettings).limit(1);
+
+    if (existingConfig.length > 0) {
+      // Met à jour la ligne existante (Id : existingConfig[0].id)
+      await db.update(adminSettings)
+        .set({ username, password })
+        .where(eq(adminSettings.id, existingConfig[0].id));
+    } else {
+      // Crée la ligne si elle n'existe pas encore du tout
+      await db.insert(adminSettings).values({ username, password });
     }
 
-    fs.writeFileSync(CREDENTIALS_FILE, JSON.stringify({ username, password }), "utf-8");
-
-    return NextResponse.json({ success: true, message: "Identifiants Admin mis à jour !" });
+    return NextResponse.json({ success: true, message: "Identifiants Admin sauvegardés en BDD !" });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: "Erreur serveur lors de la mise à jour" }, { status: 500 });
+    console.error("Erreur BDD lors de la mise à jour :", error);
+    return NextResponse.json({ error: "Erreur serveur lors de la sauvegarde" }, { status: 500 });
   }
 }

@@ -309,7 +309,7 @@ const handleClearAllLogs = async () => {
 
 
 
-// Action de modification des propres accès de l'admin
+// Action de modification des accès enregistrée exclusivement en BDD
   const handleUpdateAdminCreds = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsUpdatingCreds(true);
@@ -322,16 +322,16 @@ const handleClearAllLogs = async () => {
       });
 
       if (response.ok) {
-        alert("Vos identifiants d'accès administrateur ont été modifiés avec succès.\nUtilisez-les pour votre prochaine connexion !");
+        alert("🔒 Vos accès Administrateur ont été mis à jour directement dans la base de données !");
         setAdminUsername("");
         setAdminPassword("");
       } else {
         const data = await response.json();
-        alert(data.error || "Impossible de mettre à jour vos accès.");
+        alert(data.error || "Impossible de sauvegarder vos accès.");
       }
     } catch (err) {
       console.error(err);
-      alert("Erreur réseau.");
+      alert("Erreur réseau lors de la communication avec la base de données.");
     } finally {
       setIsUpdatingCreds(false);
     }
