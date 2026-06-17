@@ -73,7 +73,7 @@ export default function LoginPage() {
               justifyContent: "center", 
               width: "55px", 
               height: "55px", 
-              background: "#2563eb", 
+              background: "#000", 
               color: "#fff", 
               borderRadius: "14px", 
               fontSize: "26px", 
