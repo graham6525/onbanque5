@@ -1,7 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { db } from "@/lib/turso";
 import { users } from "@/lib/schema";
 import { desc } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 export async function POST(req: Request) {
   try {
@@ -70,5 +71,25 @@ export async function GET() {
       { error: "Impossible de charger les utilisateurs." },
       { status: 500 }
     );
+  }
+}
+
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const customId = searchParams.get("customId");
+
+    if (!customId) {
+      return NextResponse.json({ error: "Identifiant manquant" }, { status: 400 });
+    }
+
+    // Suppression en BDD
+    await db.delete(users).where(eq(users.customId, customId));
+
+    return NextResponse.json({ success: true, message: "Utilisateur supprimé" });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Erreur serveur lors de la suppression" }, { status: 500 });
   }
 }

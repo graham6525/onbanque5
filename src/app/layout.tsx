@@ -14,7 +14,12 @@ export default function RootLayout({
   const router = useRouter();
 
   // Détecte si l'utilisateur est actuellement sur la page de connexion (française ou allemande)
-  const isLoginPage = pathname === "/login" || pathname === "/de/login";
+ // Détecte si l'utilisateur est sur une page blanche (Login ou Admin) sans Sidebar ni Tabbar
+  const isAuthOrAdminPage = 
+    pathname === "/login" || 
+    pathname === "/de/login" || 
+    pathname === "/admin" || 
+    pathname === "/de/admin";
 
   // Détecte si l'utilisateur est actuellement dans la section allemande
   const isDe = pathname.startsWith("/de");
@@ -54,12 +59,14 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning={true}>
         
-        {/* 🔐 CONDITION : Si c'est la page de login, on affiche uniquement le contenu brut */}
-        {isLoginPage ? (
-          <main>{children}</main>
+        {isAuthOrAdminPage ? (
+          <div className="isolated-layout" style={{ background: "#f3f4f6", minHeight: "100vh", width: "100vw" }}>
+            <main>{children}</main>
+          </div>
         ) : (
-          /* 🔓 Sinon, on affiche toute l'interface bancaire habituelle */
+          /* 🔓 Sinon, on affiche toute l'interface bancaire habituelle (Home, Opérations...) */
           <div className="app-container">
+            {/* --- SIDEBAR, MAIN CONTENT et MOBILE NAV restent ici --- */}
             
             {/* --- SIDEBAR (PC uniquement) --- */}
             <aside className="sidebar" style={{  flexDirection: "column", justifyContent: "space-between" }}>
