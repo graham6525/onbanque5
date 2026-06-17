@@ -25,7 +25,6 @@ export default function LoginPage() {
       const data = await response.json();
 
       if (response.ok) {
-        // Redirection vers l'accueil une fois connecté
         router.push("/");
         router.refresh();
       } else {
@@ -38,53 +37,130 @@ export default function LoginPage() {
     }
   };
 
-  // Sécurité de longueur d'input : bouton désactivé si longueur inférieure à 5 caractères
   const isButtonDisabled = customId.length < 5 || !password || loading;
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", alignItems: "center", justifyContent: "center", background: "#f3f4f6", padding: "20px" }}>
-      <div style={{ background: "#fff", padding: "40px 30px", borderRadius: "16px", boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)", width: "100%", maxWidth: "420px", boxSizing: "border-box" }}>
+    <div 
+      style={{ 
+        display: "flex", 
+        minHeight: "100vh", 
+        width: "100vw",
+        alignItems: "center", 
+        justifyContent: "center", 
+        background: "#f3f4f6", 
+        padding: "20px",
+        boxSizing: "border-box"
+      }}
+    >
+      <div 
+        style={{ 
+          background: "#fff", 
+          padding: "40px 30px", 
+          borderRadius: "16px", 
+          boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)", 
+          width: "100%", 
+          maxWidth: "400px", 
+          boxSizing: "border-box" 
+        }}
+      >
         
+        {/* En-tête du formulaire */}
         <div style={{ textAlign: "center", marginBottom: "30px" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: "50px", height: "50px", background: "#2563eb", color: "#fff", borderRadius: "12px", fontSize: "24px", fontWeight: "bold", marginBottom: "15px" }}>
+          <div 
+            style={{ 
+              display: "inline-flex", 
+              alignItems: "center", 
+              justifyContent: "center", 
+              width: "55px", 
+              height: "55px", 
+              background: "#2563eb", 
+              color: "#fff", 
+              borderRadius: "14px", 
+              fontSize: "26px", 
+              fontWeight: "bold", 
+              marginBottom: "16px" 
+            }}
+          >
             O
           </div>
-          <h1 style={{ fontSize: "24px", fontWeight: "bold", color: "#111", margin: "0 0 8px 0" }}>Espace Client</h1>
-          <p style={{ fontSize: "14px", color: "#666", margin: "0" }}>Connectez-vous pour accéder à votre espace Onbanque.</p>
+          <h1 style={{ fontSize: "24px", fontWeight: "700", color: "#111827", margin: "0 0 8px 0", fontFamily: "'Poppins', sans-serif" }}>
+            Espace Client
+          </h1>
+          <p style={{ fontSize: "14px", color: "#4b5563", margin: "0", lineHeight: "1.5" }}>
+            Connectez-vous pour accéder à votre espace Onbanque.
+          </p>
         </div>
 
+        {/* Bloc d'erreur */}
         {error && (
-          <div style={{ background: "#fef2f2", color: "#991b1b", padding: "12px", borderRadius: "8px", fontSize: "14px", marginBottom: "20px", border: "1px solid #fca5a5" }}>
-            <i className="fa-solid fa-triangle-exclamation" style={{ marginRight: "8px" }}></i>
-            {error}
+          <div 
+            style={{ 
+              background: "#fef2f2", 
+              color: "#991b1b", 
+              padding: "12px 14px", 
+              borderRadius: "10px", 
+              fontSize: "14px", 
+              marginBottom: "20px", 
+              border: "1px solid #fee2e2",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px"
+            }}
+          >
+            <i className="fa-solid fa-triangle-exclamation" style={{ fontSize: "16px" }}></i>
+            <span>{error}</span>
           </div>
         )}
 
-        <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+        {/* Formulaire de connexion */}
+        <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", gap: "22px" }}>
+          
+          {/* Identifiant */}
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-            <label style={{ fontSize: "13px", fontWeight: "600", color: "#4b5563" }}>Identifiant Client</label>
+            <label style={{ fontSize: "13px", fontWeight: "600", color: "#374151" }}>Identifiant Client</label>
             <input
               type="text"
               placeholder="Ex: ONBK26001"
               value={customId}
               onChange={(e) => setCustomId(e.target.value)}
               required
-              style={{ padding: "12px", borderRadius: "8px", border: "1px solid #d1d5db", fontSize: "15px", outline: "none", textTransform: "uppercase" }}
+              style={{ 
+                padding: "12px 14px", 
+                borderRadius: "10px", 
+                border: "1px solid #d1d5db", 
+                fontSize: "15px", 
+                outline: "none", 
+                textTransform: "uppercase",
+                transition: "border-color 0.2s",
+                width: "100%",
+                boxSizing: "border-box"
+              }}
             />
           </div>
 
+          {/* Mot de passe */}
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-            <label style={{ fontSize: "13px", fontWeight: "600", color: "#4b5563" }}>Mot de passe</label>
+            <label style={{ fontSize: "13px", fontWeight: "600", color: "#374151" }}>Mot de passe</label>
             <input
               type="password"
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              style={{ padding: "12px", borderRadius: "8px", border: "1px solid #d1d5db", fontSize: "15px", outline: "none" }}
+              style={{ 
+                padding: "12px 14px", 
+                borderRadius: "10px", 
+                border: "1px solid #d1d5db", 
+                fontSize: "15px", 
+                outline: "none",
+                transition: "border-color 0.2s",
+                width: "100%",
+                boxSizing: "border-box"
+              }}
             />
           </div>
 
+          {/* Bouton de validation */}
           <button
             type="submit"
             disabled={isButtonDisabled}
@@ -93,28 +169,30 @@ export default function LoginPage() {
               background: isButtonDisabled ? "#9ca3af" : "#2563eb",
               color: "#fff",
               border: "none",
-              borderRadius: "8px",
+              borderRadius: "10px",
               fontSize: "16px",
-              fontWeight: "bold",
+              fontWeight: "600",
               cursor: isButtonDisabled ? "not-allowed" : "pointer",
-              transition: "background 0.2s",
+              transition: "all 0.2s ease",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               gap: "10px",
-              marginTop: "10px"
+              marginTop: "8px",
+              width: "100%"
             }}
           >
             {loading ? (
-              "Vérification..."
+              "Vérification en cours..."
             ) : (
               <>
-                <i className="fa-solid fa-shield-halved"></i>
+                <i className="fa-solid fa-shield-halved" style={{ fontSize: "15px" }}></i>
                 Se connecter en sécurité
               </>
             )}
           </button>
         </form>
+
       </div>
     </div>
   );
