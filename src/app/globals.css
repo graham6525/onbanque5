@@ -201,10 +201,10 @@ ul {
 
 /* Téléphone (Breakpoint principal) */
 @media (max-width: 768px) {
-  .sidebar {
+  .app-container .sidebar {
     display: none; /* Cache la sidebar */
   }
-
+ 
   .main-content {
     margin-left: 0; /* Plus d'espace sidebar */
     padding: 20px 20px 100px 20px; /* Padding bas pour la nav mobile */

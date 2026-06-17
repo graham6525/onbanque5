@@ -62,7 +62,7 @@ export default function RootLayout({
           <div className="app-container">
             
             {/* --- SIDEBAR (PC uniquement) --- */}
-            <aside className="sidebar" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            <aside className="sidebar" style={{  flexDirection: "column", justifyContent: "space-between" }}>
               <div>
                 <div className="logo-container">
                   <div className="log">O</div>
@@ -144,7 +144,7 @@ export default function RootLayout({
                 <span>{isDe ? "Neuigkeiten" : "Actualités"}</span>
                 {isActive("/actualite") && <div className="active-dot"></div>}
               </Link>
-              
+               
               {/* Raccourci Déconnexion Mobile */}
               <button 
                 onClick={handleLogout}
