@@ -76,7 +76,7 @@ const isDe = pathname.startsWith("/de");
       <header className="home-header">
         <div className="user-info">
           <div className="avatar-circle">
-            {userName ? userName.charAt(0).toUpperCase() : "O"}
+            {userName ? userName.charAt(0).toUpperCase() : "b"}
           </div>
           <div> 
             <p className="welcome-msg">{isDe ? "Hallo" : "Salut"} 👋</p>
@@ -156,7 +156,7 @@ const isDe = pathname.startsWith("/de");
 
       {/* Pourquoi Onbanque */}
       <section>
-        <h2 className="home-section-title">Warum Onbanque?</h2>
+        <h2 className="home-section-title">Warum BergeBank?</h2>
         <div className="feature-item">
           <div className="feature-icon-box"><i className="fa-solid fa-bolt"></i></div>
           <div className="feature-text">

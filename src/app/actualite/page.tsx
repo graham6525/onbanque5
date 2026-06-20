@@ -67,7 +67,7 @@ export default function ActualitePage() {
         </div>
         <h1 className="news-title">Actualités en Direct</h1>
         <p className="news-subtitle">
-          Suivez l'activité de la communauté Onbanque et les derniers micro-prêts accordés.
+          Suivez l'activité de la communauté BergeBank et les derniers micro-prêts accordés.
         </p>
       </div>
 

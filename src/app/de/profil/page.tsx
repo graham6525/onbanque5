@@ -18,7 +18,7 @@ export default function ProfilPage() {
       <div className="profile-user-card">
         <div className="profile-avatar">U</div>
         <div className="user-details">
-          <h2>Benutzer Onbanque</h2>
+          <h2>Benutzer BergeBank</h2>
           {/* <p>user@onbanque.com</p> */}
         </div>
       </div>

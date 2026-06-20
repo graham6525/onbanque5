@@ -67,7 +67,7 @@ export default function ActualitePage() {
         </div>
         <h1 className="news-title">Live-Nachrichten</h1>
         <p className="news-subtitle">
-          Verfolgen Sie die Aktivitäten der Onbanque-Community und die zuletzt vergebenen Mikrokredite.
+          Verfolgen Sie die Aktivitäten der BergeBank-Community und die zuletzt vergebenen Mikrokredite.
         </p>
       </div>
 

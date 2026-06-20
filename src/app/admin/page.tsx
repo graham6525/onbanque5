@@ -414,7 +414,7 @@ const handleClearAllLogs = async () => {
               style={{ padding: "6px 12px", borderRadius: "8px", fontSize: "13px", fontWeight: "600", display: "inline-flex", alignItems: "center", gap: "6px" }}
             >
               <i className="fa-solid fa-power-off"></i>
-              Quitter
+              Déconnexion
             </button>
           </div>
         </div>

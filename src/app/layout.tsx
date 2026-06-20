@@ -72,8 +72,8 @@ export default function RootLayout({
             <aside className="sidebar" style={{  flexDirection: "column", justifyContent: "space-between" }}>
               <div>
                 <div className="logo-container">
-                  <div className="log">O</div>
-                  Onbanque
+                  <div className="log">B</div>
+                  BergeBank
                 </div>
                 {/* --- TOPBAR DE LANGUE (Sidebar PC) --- */}
                 <div className="sidebar-lang-topbar" style={{ display: "flex", gap: "10px", padding: "10px 0", borderBottom: "1px solid #f3f4f6", marginBottom: "15px" }}>

@@ -87,7 +87,7 @@ export default function LoginPage() {
             Espace Client
           </h1>
           <p style={{ fontSize: "14px", color: "#4b5563", margin: "0", lineHeight: "1.5" }}>
-            Connectez-vous pour accéder à votre espace Onbanque.
+            Connectez-vous pour accéder à votre espace BergeBank.
           </p>
         </div>
 
