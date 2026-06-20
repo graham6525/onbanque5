@@ -7,43 +7,58 @@ export default function Home() {
 
   // À l'intérieur de ton composant de page d'accueil :
 const [userName, setUserName] = useState("");
-const [liveBalance, setLiveBalance] = useState("200 000");
+const [liveBalance, setLiveBalance] = useState("****");
  
 
 useEffect(() => {
-  // 1. Récupérer le solde
-  const getAmount = async () => {  
-    try {
-      const res = await fetch("/api/global-balance");
-      const data = await res.json();
-      if (data.balance) setLiveBalance(data.balance);
-    } catch (err) {
-      console.error("Erreur récupération solde:", err);
-    }
-  };
+    let userCustomId = "";
 
-  // 2. Récupérer le nom de l'utilisateur connecté via la nouvelle API de profil
-  const getUserProfile = async () => {
-    try {
-      const res = await fetch("/api/auth-client/profile");
-      const data = await res.json();
-      if (data.success && data.name) {
-        setUserName(data.name);
+    // 1. Fonction pour récupérer le solde avec l'ID
+    const getAmount = async (id: string) => {
+      if (!id) return;
+      try {
+        const res = await fetch(`/api/global-balance?customId=${id}`);
+        const data = await res.json();
+        if (data.balance) {
+          setLiveBalance(data.balance);
+        }
+      } catch (err) {
+        console.error("Erreur récupération solde:", err);
       }
-    } catch (err) {
-      console.error("Erreur récupération nom utilisateur:", err);
-    }
-  };
+    };
 
-  // Exécution immédiate au montage du composant
-  getAmount();
-  getUserProfile();
+    // 2. Récupérer le profil, puis appeler le solde directement
+    const getUserProfile = async () => {
+      try {
+        const res = await fetch("/api/auth-client/profile");
+        const data = await res.json();
+        
+        if (data.success && data.name) {
+          setUserName(data.name);
+          
+          // On récupère le customId qu'on vient d'ajouter dans l'API
+          if (data.customId) {
+            userCustomId = data.customId;
+            getAmount(data.customId); // 🚀 Charge le solde immédiatement
+          }
+        }
+      } catch (err) {
+        console.error("Erreur récupération profil utilisateur:", err);
+      }
+    };
 
-  // Rafraîchissement du solde toutes les 5 secondes
-  const interval = setInterval(getAmount, 5000);
-  return () => clearInterval(interval);
-}, []);
+    // Lancement au chargement de la page
+    getUserProfile();
 
+    // Rafraîchissement automatique toutes les 5 secondes
+    const interval = setInterval(() => {
+      if (userCustomId) {
+        getAmount(userCustomId);
+      }
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
   // État pour savoir si le solde est visible ou caché
 
   const [isVisible, setIsVisible] = useState(true);

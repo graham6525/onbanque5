@@ -31,7 +31,8 @@ export async function GET() {
     // 3. Renvoyer le nom au frontend
     return NextResponse.json({ 
       success: true, 
-      name: foundUser[0].name 
+      name: foundUser[0].name,
+      customId: userCustomId
     });
 
   } catch (error) {

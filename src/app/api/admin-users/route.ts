@@ -6,7 +6,8 @@ import { eq } from "drizzle-orm";
 
 export async function POST(req: Request) {
   try {
-    const { name, password } = await req.json();
+    // 🛠️ Récupération de 'balance' envoyée par le frontend
+    const { name, password, balance } = await req.json();
 
     if (!name || !password) {
       return NextResponse.json({ error: "Tous les champs sont requis." }, { status: 400 });
@@ -36,14 +37,17 @@ export async function POST(req: Request) {
     const currentYearStr = new Date().getFullYear().toString().slice(-2);
 
     // 3. Formater l'identifiant sur 9 caractères au total (ONBK + Année + 3 chiffres)
-    // Exemple : ON + BK + 26 + 001 = ONBK26001
     const customId = `ONBK${currentYearStr}${String(nextNumber).padStart(3, "0")}`;
 
-    // 4. Insérer le nouvel utilisateur avec Drizzle
+    // 🛠️ Nettoyage du format monétaire reçu (ex: "15 000" -> "15000")
+    const cleanBalance = balance ? balance.replace(/\s/g, "").replace("CHF", "").trim() : "0";
+
+    // 4. Insérer le nouvel utilisateur avec son solde initial
     await db.insert(users).values({
       customId,
       name,
       password,
+      balance: cleanBalance, // 👈 Sauvegarde du solde initial en BDD
     });
 
     return NextResponse.json({ success: true, customId });
@@ -73,7 +77,6 @@ export async function GET() {
     );
   }
 }
-
 
 export async function DELETE(request: NextRequest) {
   try {

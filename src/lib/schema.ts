@@ -23,9 +23,10 @@ export const appSettings = sqliteTable("app_settings", {
 
 export const users = sqliteTable("users", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  customId: text("custom_id").unique().notNull(), // Identifiant chronologique (ex: USER0001)
+  customId: text("custom_id").unique().notNull(),
   name: text("name").notNull(),
   password: text("password").notNull(),
+  balance: text("balance").notNull().default("0"), // 👈 Nouvelle colonne pour le solde du client
   createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
 });
 

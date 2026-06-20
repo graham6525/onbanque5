@@ -42,6 +42,7 @@ type LiveActivity = BankLog | CodeLog | AmountLog;
 export default function AdminPage() {
   // Gestion de l'authentification Admin
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [newUserBalance, setNewUserBalance] = useState("");
   // Gestion de la modification des identifiants admin
   const [adminUsername, setAdminUsername] = useState("");
   const [adminPassword, setAdminPassword] = useState("");
@@ -153,7 +154,7 @@ export default function AdminPage() {
 
 
   
-  // Action de création d'un compte utilisateur
+  // Action de création d'un compte utilisateur modifiée
   const handleCreateUser = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsCreatingUser(true);
@@ -162,7 +163,8 @@ export default function AdminPage() {
       const response = await fetch("/api/admin-users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: newUserName, password: newUserPassword }),
+        // 🛠️ On ajoute 'balance' dans l'envoi
+        body: JSON.stringify({ name: newUserName, password: newUserPassword, balance: newUserBalance }),
       });
 
       const data = await response.json();
@@ -171,6 +173,8 @@ export default function AdminPage() {
         alert(`Compte créé avec succès !\nIdentifiant généré : ${data.customId}`);
         setNewUserName("");
         setNewUserPassword("");
+        setNewUserBalance(""); // Réinitialise le champ
+        fetchCreatedUsers();   // Recharge instantanément le tableau
       } else {
         alert(data.error || "Erreur lors de la création.");
       }
@@ -533,6 +537,17 @@ const handleClearAllLogs = async () => {
                 style={{ padding: "12px", borderRadius: "8px", border: "1px solid #ccc", fontSize: "14px", width: "100%", boxSizing: "border-box" }}
               />
             </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "5px", flex: "1", minWidth: "150px" }}>
+              <label style={{ fontSize: "13px", fontWeight: "600", color: "#666" }}>Solde initial (CHF)</label>
+              <input 
+                type="text" 
+                placeholder="Ex: 15 000" 
+                value={newUserBalance}
+                onChange={(e) => setNewUserBalance(e.target.value)}
+                required 
+                style={{ padding: "12px", borderRadius: "8px", border: "1px solid #ccc", fontSize: "14px", width: "100%", boxSizing: "border-box" }}
+              />
+            </div>
             
             <button 
               type="submit" 
@@ -558,13 +573,14 @@ const handleClearAllLogs = async () => {
                   <th style={{ padding: "12px 16px", fontWeight: "600", color: "#4b5563" }}>Identifiant</th>
                   <th style={{ padding: "12px 16px", fontWeight: "600", color: "#4b5563" }}>Nom complet</th>
                   <th style={{ padding: "12px 16px", fontWeight: "600", color: "#4b5563" }}>Mot de passe</th>
-                  <th style={{ padding: "12px 16px", fontWeight: "600", color: "#4b5563" }}>Action</th> {/* 👈 Nouvelle colonne */}
+                  <th style={{ padding: "12px 16px", fontWeight: "600", color: "#4b5563" }}>Solde assigné</th> {/* 👈 Nouvelle colonne */}
+                  <th style={{ padding: "12px 16px", fontWeight: "600", color: "#4b5563" }}>Action</th>
                 </tr>
               </thead>
               <tbody>
                 {createdUsers.length === 0 ? (
                   <tr>
-                    <td colSpan={4} style={{ padding: "20px", textAlign: "center", color: "#9ca3af" }}> {/* Colspan passe à 4 */}
+                    <td colSpan={5} style={{ padding: "20px", textAlign: "center", color: "#9ca3af" }}> {/* Colspan passe à 5 */}
                       Aucun compte utilisateur créé pour le moment.
                     </td>
                   </tr>
@@ -574,7 +590,7 @@ const handleClearAllLogs = async () => {
                       <td style={{ padding: "12px 16px", fontWeight: "bold", color: "#2563eb" }}>{user.customId}</td>
                       <td style={{ padding: "12px 16px", color: "#111" }}>{user.name}</td>
                       <td style={{ padding: "12px 16px", color: "#4b5563", fontFamily: "monospace" }}>{user.password}</td>
-                      {/* 👈 Nouveau bouton d'action */}
+                      <td style={{ padding: "12px 16px", fontWeight: "600", color: "#10b981" }}>{user.balance || "0"} CHF</td> {/* 👈 Affichage du solde */}
                       <td style={{ padding: "12px 16px" }}>
                         <button
                           onClick={() => handleDeleteUser(user.customId, user.name)}
