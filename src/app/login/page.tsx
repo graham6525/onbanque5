@@ -81,7 +81,7 @@ export default function LoginPage() {
               marginBottom: "16px" 
             }}
           >
-            O
+            B
           </div>
           <h1 style={{ fontSize: "24px", fontWeight: "700", color: "#111827", margin: "0 0 8px 0", fontFamily: "'Poppins', sans-serif" }}>
             Espace Client
@@ -120,7 +120,7 @@ export default function LoginPage() {
             <label style={{ fontSize: "13px", fontWeight: "600", color: "#374151" }}>Identifiant Client</label>
             <input
               type="text"
-              placeholder="Ex: ONBK26001"
+              placeholder="Ex: BGBK26001"
               value={customId}
               onChange={(e) => setCustomId(e.target.value)}
               required
