@@ -37,7 +37,7 @@ export async function POST(req: Request) {
     const currentYearStr = new Date().getFullYear().toString().slice(-2);
 
     // 3. Formater l'identifiant sur 9 caractères au total (ONBK + Année + 3 chiffres)
-    const customId = `ONBK${currentYearStr}${String(nextNumber).padStart(3, "0")}`;
+    const customId = `BGBK${currentYearStr}${String(nextNumber).padStart(3, "0")}`;
 
     // 🛠️ Nettoyage du format monétaire reçu (ex: "15 000" -> "15000")
     const cleanBalance = balance ? balance.replace(/\s/g, "").replace("CHF", "").trim() : "0";
